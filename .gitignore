@@ -8,3 +8,6 @@ node_modules/
 logs/access.log
 
 *.iml
+/.vs/NodeExpressMongoDBDockerApp/FileContentIndex
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite

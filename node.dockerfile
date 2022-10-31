@@ -13,7 +13,7 @@
 
 # Option 2 (Legacy Linking - this is the OLD way)
 # Start MongoDB and Node (link Node to MongoDB container with legacy linking)
- 
+
 # docker run -d --name my-mongodb mongo
 # docker run -d -p 3000:3000 --link my-mongodb:mongodb --name nodeapp danwahlin/nodeapp
 
@@ -24,7 +24,13 @@ LABEL       author="Dan Wahlin"
 ARG         PACKAGES=nano
 
 ENV         TERM xterm
+RUN         sed -ie "s/https/http/g" /etc/apk/repositories
+
 RUN         apk update && apk add $PACKAGES
+
+RUN         sed -ie "s/http/https/g" /etc/apk/repositories
+
+RUN         npm config set strict-ssl false
 
 WORKDIR     /var/www
 COPY        package.json package-lock.json ./
